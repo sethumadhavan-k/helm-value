@@ -1,0 +1,370 @@
+global:
+  imageRegistry: ''
+  imagePullSecrets: []
+  storageClass: ''
+kubeVersion: ''
+nameOverride: ''
+fullnameOverride: ''
+namespaceOverride: ''
+clusterDomain: cluster.local
+commonAnnotations: {}
+commonLabels: {}
+extraDeploy: [1,2,4]
+extraDeploy1: ["2","4"]
+diagnosticMode:
+  enabled: false
+  command:
+    - sleep
+  args:
+    - infinity
+image:
+  registry: docker.io
+  repository: bitnami/mysql
+  tag: 8.0.29-debian-10-r23
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+  debug: false
+architecture: standalone
+auth:
+  rootPassword: ''
+  database: my_database
+  username: ''
+  password: ''
+  replicationUser: replicator
+  replicationPassword: ''
+  existingSecret: ''
+  usePasswordFiles: false
+  customPasswordFiles: {}
+initdbScripts: {}
+initdbScriptsConfigMap: ''
+primary:
+  command: []
+  args: []
+  args2: 
+    - sample1
+    - sample2
+  arg3:
+    test:
+      test2:
+        name: "hahaha"
+  lifecycleHooks: {}
+  hostAliases: []
+  configuration: |-
+    [mysqld]
+    default_authentication_plugin=mysql_native_password
+    skip-name-resolve
+    explicit_defaults_for_timestamp
+    basedir=/opt/bitnami/mysql
+    plugin_dir=/opt/bitnami/mysql/lib/plugin
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    datadir=/bitnami/mysql/data
+    tmpdir=/opt/bitnami/mysql/tmp
+    max_allowed_packet=16M
+    bind-address=0.0.0.0
+    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
+    log-error=/opt/bitnami/mysql/logs/mysqld.log
+    character-set-server=UTF8
+    collation-server=utf8_general_ci
+    slow_query_log=0
+    slow_query_log_file=/opt/bitnami/mysql/logs/mysqld.log
+    long_query_time=10.0
+
+    [client]
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    default-character-set=UTF8
+    plugin_dir=/opt/bitnami/mysql/lib/plugin
+
+    [manager]
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
+  existingConfigmap: ''
+  updateStrategy:
+    type: RollingUpdate
+  podAnnotations: {}
+  podAffinityPreset: ''
+  podAntiAffinityPreset: soft
+  nodeAffinityPreset:
+    type: ''
+    key: ''
+    values: []
+  affinity: {}
+  nodeSelector: {}
+  tolerations: []
+  priorityClassName: ''
+  schedulerName: ''
+  terminationGracePeriodSeconds: ''
+  topologySpreadConstraints: []
+  podManagementPolicy: ''
+  podSecurityContext:
+    enabled: true
+    fsGroup: 1001
+  containerSecurityContext:
+    enabled: true
+    runAsUser: 1001
+    runAsNonRoot: true
+  resources:
+    limits: {}
+    requests: {}
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+  startupProbe:
+    enabled: true
+    initialDelaySeconds: 15
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 10
+    successThreshold: 1
+  customLivenessProbe: {}
+  customReadinessProbe: {}
+  customStartupProbe: {}
+  extraFlags: ''
+  extraEnvVars: []
+  extraEnvVarsCM: ''
+  extraEnvVarsSecret: ''
+  persistence:
+    enabled: true
+    existingClaim: ''
+    storageClass: ''
+    annotations: {}
+    accessModes:
+      - ReadWriteOnce
+    size: 8Gi
+    selector: {}
+  extraVolumes: []
+  extraVolumeMounts: []
+  initContainers: []
+  sidecars: []
+  service:
+    type: ClusterIP
+    ports:
+      mysql: 3306
+    nodePorts:
+      mysql: ''
+    clusterIP: ''
+    loadBalancerIP: ''
+    externalTrafficPolicy: Cluster
+    loadBalancerSourceRanges: []
+    extraPorts: []
+    annotations: {}
+    sessionAffinity: None
+    sessionAffinityConfig: {}
+  pdb:
+    create: false
+    minAvailable: 1
+    maxUnavailable: ''
+  podLabels: {}
+secondary:
+  replicaCount: 1
+  hostAliases: []
+  command: []
+  args: []
+  lifecycleHooks: {}
+  configuration: |-
+    [mysqld]
+    default_authentication_plugin=mysql_native_password
+    skip-name-resolve
+    explicit_defaults_for_timestamp
+    basedir=/opt/bitnami/mysql
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    datadir=/bitnami/mysql/data
+    tmpdir=/opt/bitnami/mysql/tmp
+    max_allowed_packet=16M
+    bind-address=0.0.0.0
+    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
+    log-error=/opt/bitnami/mysql/logs/mysqld.log
+    character-set-server=UTF8
+    collation-server=utf8_general_ci
+    slow_query_log=0
+    slow_query_log_file=/opt/bitnami/mysql/logs/mysqld.log
+    long_query_time=10.0
+
+    [client]
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    default-character-set=UTF8
+
+    [manager]
+    port=3306
+    socket=/opt/bitnami/mysql/tmp/mysql.sock
+    pid-file=/opt/bitnami/mysql/tmp/mysqld.pid
+  existingConfigmap: ''
+  updateStrategy:
+    type: RollingUpdate
+  podAnnotations: {}
+  podAffinityPreset: ''
+  podAntiAffinityPreset: soft
+  nodeAffinityPreset:
+    type: ''
+    key: ''
+    values: []
+  affinity: {}
+  nodeSelector: {}
+  tolerations: []
+  priorityClassName: ''
+  schedulerName: ''
+  terminationGracePeriodSeconds: ''
+  topologySpreadConstraints: []
+  podManagementPolicy: ''
+  podSecurityContext:
+    enabled: true
+    fsGroup: 1001
+  containerSecurityContext:
+    enabled: true
+    runAsUser: 1001
+    runAsNonRoot: true
+  resources:
+    limits: {}
+    requests: {}
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+  startupProbe:
+    enabled: true
+    initialDelaySeconds: 15
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 15
+    successThreshold: 1
+  customLivenessProbe: {}
+  customReadinessProbe: {}
+  customStartupProbe: {}
+  extraFlags: ''
+  extraEnvVars: []
+  extraEnvVarsCM: ''
+  extraEnvVarsSecret: ''
+  persistence:
+    enabled: true
+    storageClass: ''
+    annotations: {}
+    accessModes:
+      - ReadWriteOnce
+    size: 8Gi
+    selector: {}
+  extraVolumes: []
+  extraVolumeMounts: []
+  initContainers: []
+  sidecars: []
+  service:
+    type: ClusterIP
+    ports:
+      mysql: 3306
+    nodePorts:
+      mysql: ''
+    clusterIP: ''
+    loadBalancerIP: ''
+    externalTrafficPolicy: Cluster
+    loadBalancerSourceRanges: []
+    extraPorts: []
+    annotations: {}
+    sessionAffinity: None
+    sessionAffinityConfig: {}
+  pdb:
+    create: false
+    minAvailable: 1
+    maxUnavailable: ''
+  podLabels: {}
+serviceAccount:
+  create: true
+  name: ''
+  annotations: {}
+  automountServiceAccountToken: true
+rbac:
+  create: false
+  rules: []
+networkPolicy:
+  enabled: false
+  allowExternal: true
+  explicitNamespacesSelector: {}
+volumePermissions:
+  enabled: false
+  image:
+    registry: docker.io
+    repository: bitnami/bitnami-shell
+    tag: 10-debian-10-r431
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+  resources: {}
+  resources2: "dd"
+  resources3: 11
+  resources4: true
+  resources5: 100.07
+  resources6: 100.9
+  resources7: 9.44444420
+metrics:
+  enabled: false
+  image:
+    registry: docker.io
+    repository: bitnami/mysqld-exporter
+    tag: 0.14.0-debian-10-r75
+    pullPolicy: IfNotPresent
+    pullSecrets: []
+  service:
+    type: ClusterIP
+    port: 9104
+    annotations:
+      prometheus.io/scrape: 'true'
+      prometheus.io/port: '{{ .Values.metrics.service.port }}'
+  extraArgs:
+    primary: []
+    secondary: []
+  resources:
+    limits: {}
+    requests: {}
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 120
+    periodSeconds: 10
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+  serviceMonitor:
+    enabled: false
+    namespace: ''
+    jobLabel: ''
+    interval: 30s
+    scrapeTimeout: ''
+    relabelings: []
+    metricRelabelings: []
+    selector: {}
+    honorLabels: false
+    labels: {}
+    annotations: {}
+  prometheusRule:
+    enabled: false
+    namespace: ''
+    additionalLabels: {}
+    rules: []
